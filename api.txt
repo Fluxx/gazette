@@ -1,0 +1,26 @@
+Gazette - Main container module
+
+Gazette::Configuration - Module for lib configuration.
+Gazette::Configuration::Api - Container class for holding API endpoint definition, if the
+request is secure or not, etc.
+Gazette::Configuration::Credentials - Container class for username and optional password.
+
+Gazette::Client - API client for making requests.  Requests look like the following:
+
+@client = Gazette::Client.new("username")
+
+But cal also take the following forms
+
+Gazette::Client.new(:username => "username", :password => "password")
+Gazette::Client.new("username", "password")
+Gazette::Client.new(:username => "username", :set => "of", :client => "options")
+
+Once a client has been established, you can make the following calls:
+
+@client.authenticate - authenticate the user
+@client.add(:url => "http://...", :title => "my title") - Adds a URL to the users instapaper account.
+
+The response from API calls return Gazette::Response object, which holds the actual status code and success/failure of the request.  Methods like #succeeded? can be used to check
+on the status of the API call.
+
+Gazette::Request - Class for making the request.  Holds on to instances of the Configuration and Credentials classes for use.
