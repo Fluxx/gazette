@@ -1,10 +1,5 @@
 Gazette - Main container module
 
-Gazette::Configuration - Module for lib configuration.
-Gazette::Configuration::Api - Container class for holding API endpoint definition, if the
-request is secure or not, etc.
-Gazette::Configuration::Credentials - Container class for username and optional password.
-
 Gazette::Client - API client for making requests.  Requests look like the following:
 
 @client = Gazette::Client.new("username")
