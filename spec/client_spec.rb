@@ -39,3 +39,9 @@ describe Gazette::Client, ".new" do
   end
     
 end
+
+describe Gazette::Client, "#authenticate" do
+  before(:each) do
+    @client = Gazette::Client.new("foo")
+  end
+end
