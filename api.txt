@@ -12,4 +12,12 @@ Once a client has been established, you can make the following calls:
 The response from API calls return Gazette::Response object, which holds the actual status code and success/failure of the request.  Methods like #succeeded? can be used to check
 on the status of the API call.
 
-Gazette::Request - Class for making the request.  Holds on to instances of the Configuration and Credentials classes for use.
+TODO
+--------------------------------------
+- Add FakeWeb and build stub API.
+- Create Response class
+  - Response values (200, 403, 500, etc) or throw exception, i.e. Gazette::Response::InvalidCredentials.
+  - #succeeded?
+  - #headers (Content-Location, X-Instapaper-Title)
+- Audit app for correct usage given the "preferred language" section of the API docs.
+- JSONP (v2)
