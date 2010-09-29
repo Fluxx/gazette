@@ -12,6 +12,7 @@ GEM
     rspec (1.3.0)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
+    yard (0.4.0)
 
 PLATFORMS
   ruby
@@ -20,3 +21,4 @@ DEPENDENCIES
   jeweler
   rake
   rspec
+  yard
