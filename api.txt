@@ -2,13 +2,7 @@ Gazette - Main container module
 
 Gazette::Client - API client for making requests.  Requests look like the following:
 
-@client = Gazette::Client.new("username")
-
-But cal also take the following forms
-
-Gazette::Client.new(:username => "username", :password => "password")
-Gazette::Client.new("username", "password")
-Gazette::Client.new(:username => "username", :set => "of", :client => "options")
+@client = Gazette::Client.new("username", :set => "of", :client => "options")
 
 Once a client has been established, you can make the following calls:
 
