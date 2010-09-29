@@ -1,6 +1,6 @@
 = gazette
 
-Description goes here.
+Ruby library for the Instapaper API.  Work in progress.
 
 == Note on Patches/Pull Requests
  
