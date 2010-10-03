@@ -14,10 +14,9 @@ on the status of the API call.
 
 TODO
 --------------------------------------
-- Add FakeWeb and build stub API.
+- Basic auth (Instapaper prefers it)
 - Create Response class
-  - Response values (200, 403, 500, etc) or throw exception, i.e. Gazette::Response::InvalidCredentials.
-  - #succeeded?
   - #headers (Content-Location, X-Instapaper-Title)
 - Audit app for correct usage given the "preferred language" section of the API docs.
+- Toggle for http/https
 - JSONP (v2)
