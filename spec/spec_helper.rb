@@ -16,7 +16,7 @@ end
 def stub_instapaper_api(configuration)
   configuration.each do |method, opts|
     ["", "foo", "foo:bar"].each do |hba|
-      base = Gazette::Client::ENDPOINT.gsub(/(https?:\/\/)/, '\1'+"#{hba}@")
+      base = "http://#{hba}@#{Gazette::Api::ADDRESS}#{Gazette::Api::ENDPOINT}"
       FakeWeb.register_uri(:any, base+method.to_s, opts)
     end
   end

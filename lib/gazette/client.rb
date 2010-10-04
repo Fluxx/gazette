@@ -7,9 +7,6 @@ module Gazette
     attr_reader :username
     attr_reader :password
     
-    # TODO: http/https choice
-    ENDPOINT = "http://www.instapaper.com/api/".freeze
-
     # Build a new client with the supplied username and options
     def initialize(username, options = {})
       @username = username
@@ -31,9 +28,8 @@ module Gazette
     
     # Actually heads out to the internet and performs the request
     def request(method, params = {})
-      uri = URI.parse(ENDPOINT + method.to_s)
-      http = Net::HTTP.new(uri.host)
-      request = Net::HTTP::Get.new(uri.path)
+      http = Net::HTTP.new(Api::ADDRESS)
+      request = Net::HTTP::Get.new(Api::ENDPOINT+method.to_s)
       request.basic_auth @username, @password
       http.start { http.request(request) }
     end
