@@ -1,5 +1,4 @@
 require "net/http"
-require "uri"
 
 module Gazette
   class Client
