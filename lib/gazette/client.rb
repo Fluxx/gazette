@@ -32,7 +32,10 @@ module Gazette
     # Actually heads out to the internet and performs the request
     def request(method, params = {})
       uri = URI.parse(ENDPOINT + method.to_s)
-      Net::HTTP.new(uri.host).head(uri.path)
+      http = Net::HTTP.new(uri.host)
+      request = Net::HTTP::Get.new(uri.path)
+      request.basic_auth @username, @password
+      http.start { http.request(request) }
     end
     
     # Build options for the request based on what's passed in

@@ -44,7 +44,33 @@ describe Gazette::Client, "#authenticate" do
   before(:each) do
     @client = Gazette::Client.new("foo")
   end
-
+  
+  it "raises an argument error if the 2nd parameter is not a hash"
+  
+  describe "HTTP basic auth" do
+    
+    def mock_get_request
+      @my_get = Net::HTTP::Get.new('/api/authenticate')
+      Net::HTTP::Get.stub!(:new).and_return(@my_get)
+    end
+    
+    before(:each) do
+      mock_get_request
+      stub_instapaper_api(:authenticate => {:status => 200})
+    end
+    
+    it "passes along the username" do
+      @my_get.should_receive(:basic_auth).with("foo", nil)
+      @client.authenticate
+    end
+    
+    it "passes along the password if specified" do
+      @client = Gazette::Client.new("foo", :password => "bar")
+      @my_get.should_receive(:basic_auth).with("foo", "bar")
+      @client.authenticate
+    end
+  end
+    
   describe "with a 200 OK response" do
     before(:each) do
       stub_instapaper_api(:authenticate => {:status => 200})
