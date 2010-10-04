@@ -5,6 +5,10 @@ describe Gazette::Client, ".new" do
   it "raises an error if no fist argument it passed" do
     lambda { Gazette::Client.new }.should raise_error(ArgumentError)
   end
+  
+  it "raises an argument error if the 2nd parameter is not a hash" do
+    lambda { Gazette::Client.new("foo", 56) }.should raise_error(ArgumentError)
+  end
 
   shared_examples_for "a properlty constructed client" do
     it "sets the username as the first argument" do
@@ -44,8 +48,6 @@ describe Gazette::Client, "#authenticate" do
   before(:each) do
     @client = Gazette::Client.new("foo")
   end
-  
-  it "raises an argument error if the 2nd parameter is not a hash"
   
   describe "HTTP basic auth" do
     

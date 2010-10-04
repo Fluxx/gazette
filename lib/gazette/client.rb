@@ -8,6 +8,7 @@ module Gazette
     
     # Build a new client with the supplied username and options
     def initialize(username, options = {})
+      raise ArgumentError.new("2nd parameter must be a Hash") unless options.is_a?(Hash)
       @username = username
       @password = options.delete(:password)
       @options = options
