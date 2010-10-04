@@ -14,7 +14,7 @@ on the status of the API call.
 
 TODO
 --------------------------------------
-- Basic auth (Instapaper prefers it)
+- #add method
 - Create Response class
   - #headers (Content-Location, X-Instapaper-Title)
 - Audit app for correct usage given the "preferred language" section of the API docs.
