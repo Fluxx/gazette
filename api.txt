@@ -14,9 +14,6 @@ on the status of the API call.
 
 TODO
 --------------------------------------
-- #add method
-- Create Response class
-  - #headers (Content-Location, X-Instapaper-Title)
 - Audit app for correct usage given the "preferred language" section of the API docs.
 - Toggle for http/https
 - JSONP (v2)
