@@ -16,25 +16,25 @@ module Gazette
     
     # Attempts to authenticate
     def authenticate
-      case request(:authenticate, request_options)
-        when Net::HTTPOK then return Response::Success.new
-        when Net::HTTPForbidden then raise Response::InvalidCredentials
-        when Net::HTTPInternalServerError then raise Response::ServerError
-        else raise Response::UnknownError
-      end
+      parse_response_for request(:authenticate)
     end
     
     # Adds a URL to a user's instapaper account
     def add(url, options = {})
-      case request(:add, options.merge(:url => url))
+      parse_response_for request(:authenticate, options.merge(:url => url))
+    end
+    
+    private
+    
+    # Handles the response from Instapaper
+    def parse_response_for(request)
+      case request
         when Net::HTTPOK then return Response::Success.new
         when Net::HTTPForbidden then raise Response::InvalidCredentials
         when Net::HTTPInternalServerError then raise Response::ServerError
         else raise Response::UnknownError
       end
     end
-    
-    private
     
     # Actually heads out to the internet and performs the request
     def request(method, params = {})
@@ -45,13 +45,5 @@ module Gazette
       http.start { http.request(request) }
     end
     
-    # Build options for the request based on what's passed in
-    def request_options
-      Hash.new.tap do |hash|
-        hash[:username] if @username
-        hash[:password] if @password
-      end
-    end
-
   end
 end
