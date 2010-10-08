@@ -23,7 +23,17 @@ module Gazette
         else raise Response::UnknownError
       end
     end
-        
+    
+    # Adds a URL to a user's instapaper account
+    def add(url, options = {})
+      case request(:add, options.merge(:url => url))
+        when Net::HTTPOK then return Response::Success.new
+        when Net::HTTPForbidden then raise Response::InvalidCredentials
+        when Net::HTTPInternalServerError then raise Response::ServerError
+        else raise Response::UnknownError
+      end
+    end
+    
     private
     
     # Actually heads out to the internet and performs the request
@@ -31,6 +41,7 @@ module Gazette
       http = Net::HTTP.new(Api::ADDRESS)
       request = Net::HTTP::Post.new(Api::ENDPOINT+method.to_s)
       request.basic_auth @username, @password
+      request.set_form_data(params)
       http.start { http.request(request) }
     end
     
