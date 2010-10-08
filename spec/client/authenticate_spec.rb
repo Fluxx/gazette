@@ -17,6 +17,12 @@ describe Gazette::Client, "#authenticate" do
       stub_instapaper_api(:authenticate => {:status => 200})
     end
     
+    it "calls the 'authenticate' instapaper API call" do
+      stub_instapaper_api(:add => {:status => 200})
+      Net::HTTP::Post.should_receive(:new).with(/authenticate/).and_return(@my_post)
+      @client.authenticate
+    end
+    
     it "passes along the username" do
       @my_post.should_receive(:basic_auth).with("foo", nil)
       @client.authenticate

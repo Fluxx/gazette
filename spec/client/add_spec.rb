@@ -15,6 +15,12 @@ describe Gazette::Client, "#add" do
     end.should raise_error(ArgumentError)
   end
   
+  it "calls the add instapaper API call" do
+    stub_instapaper_api(:add => {:status => 200})
+    Net::HTTP::Post.should_receive(:new).with(/add/).and_return(@my_post)
+    @client.add(INTERESTING_ARTICLE)
+  end
+  
   describe "parameters" do
     before(:each) do
       stub_instapaper_api(:add => {:status => 200})

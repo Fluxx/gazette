@@ -21,7 +21,7 @@ module Gazette
     
     # Adds a URL to a user's instapaper account
     def add(url, options = {})
-      parse_response_for request(:authenticate, options.merge(:url => url))
+      parse_response_for request(:add, options.merge(:url => url))
     end
     
     private
