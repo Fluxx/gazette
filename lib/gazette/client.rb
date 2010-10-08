@@ -27,6 +27,8 @@ module Gazette
     private
     
     # Handles the response from Instapaper
+    # @todo Put the raising logic in the Api class/module, then leave the response return
+    # to this method
     def parse_response_for(response)
       case response
         when Net::HTTPOK then return Response::Success.new(response)
@@ -37,6 +39,7 @@ module Gazette
     end
     
     # Actually heads out to the internet and performs the request
+    # @todo Perhaps put me in the Api class/module?
     def request(method, params = {})
       http = Net::HTTP.new(Api::ADDRESS)
       request = Net::HTTP::Post.new(Api::ENDPOINT+method.to_s)

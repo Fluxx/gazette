@@ -4,6 +4,7 @@ INTERESTING_ARTICLE = "http://blog.instapaper.com/post/1256471940"
 
 describe Gazette::Client, "#add" do
   before(:each) do
+    # @todo Abstract me out
     @my_post = Net::HTTP::Post.new('/api/add')
     Net::HTTP::Post.stub!(:new).and_return(@my_post)
     @client = Gazette::Client.new("foo")
@@ -17,6 +18,7 @@ describe Gazette::Client, "#add" do
   
   it "calls the add instapaper API call" do
     stub_instapaper_api(:add => {:status => 200})
+    # @todo Abstract me out
     Net::HTTP::Post.should_receive(:new).with(/add/).and_return(@my_post)
     @client.add(INTERESTING_ARTICLE)
   end

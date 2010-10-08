@@ -8,6 +8,7 @@ describe Gazette::Client, "#authenticate" do
   describe "HTTP basic auth" do
     
     def mock_get_request
+      # @todo Abstract me out
       @my_post = Net::HTTP::Post.new('/api/authenticate')
       Net::HTTP::Post.stub!(:new).and_return(@my_post)
     end
