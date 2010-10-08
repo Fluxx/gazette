@@ -8,8 +8,8 @@ describe Gazette::Client, "#authenticate" do
   describe "HTTP basic auth" do
     
     def mock_get_request
-      @my_get = Net::HTTP::Get.new('/api/authenticate')
-      Net::HTTP::Get.stub!(:new).and_return(@my_get)
+      @my_post = Net::HTTP::Post.new('/api/authenticate')
+      Net::HTTP::Post.stub!(:new).and_return(@my_post)
     end
     
     before(:each) do
@@ -18,13 +18,13 @@ describe Gazette::Client, "#authenticate" do
     end
     
     it "passes along the username" do
-      @my_get.should_receive(:basic_auth).with("foo", nil)
+      @my_post.should_receive(:basic_auth).with("foo", nil)
       @client.authenticate
     end
     
     it "passes along the password if specified" do
       @client = Gazette::Client.new("foo", :password => "bar")
-      @my_get.should_receive(:basic_auth).with("foo", "bar")
+      @my_post.should_receive(:basic_auth).with("foo", "bar")
       @client.authenticate
     end
   end

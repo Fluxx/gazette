@@ -23,13 +23,13 @@ module Gazette
         else raise Response::UnknownError
       end
     end
-    
+        
     private
     
     # Actually heads out to the internet and performs the request
     def request(method, params = {})
       http = Net::HTTP.new(Api::ADDRESS)
-      request = Net::HTTP::Get.new(Api::ENDPOINT+method.to_s)
+      request = Net::HTTP::Post.new(Api::ENDPOINT+method.to_s)
       request.basic_auth @username, @password
       http.start { http.request(request) }
     end
