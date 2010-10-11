@@ -41,5 +41,35 @@ describe Gazette::Client, ".new" do
     end
 
   end
+  
+end
 
+describe Gazette::Client, "HTTP basic auth" do
+  before(:each) do
+    stub_instapaper_api(:authenticate => {:status => 200})
+    @client = Gazette::Client.new("foo")
+    @my_post = Net::HTTP::Post.new('/api/authenticate')
+    Net::HTTP::Post.stub!(:new).and_return(@my_post)
+  end  
+  
+  it "passes along the username" do
+    @my_post.should_receive(:basic_auth).with("foo", nil)
+    @client.authenticate
+  end
+  
+  it "passes along the password if specified" do
+    @client = Gazette::Client.new("foo", :password => "bar")
+    @my_post.should_receive(:basic_auth).with("foo", "bar")
+    @client.authenticate
+  end
+  
+  it "passes the jsonp as a parameter if specified" do
+    @my_post.should_receive(:set_form_data).with(hash_including(:jsonp => "myfunc"))
+    @client.authenticate(:jsonp => "myfunc")
+  end
+end
+
+describe Gazette::Client, "over HTTPS" do
+  @client = Gazette::Client.new("foo", :https => true)
+  stub_instapaper_api(:authenticate => {:status => 200})
 end

@@ -5,40 +5,11 @@ describe Gazette::Client, "#authenticate" do
     @client = Gazette::Client.new("foo")
   end
   
-  describe "HTTP basic auth" do
-    
-    def mock_get_request
-      # @todo Abstract me out
-      @my_post = Net::HTTP::Post.new('/api/authenticate')
-      Net::HTTP::Post.stub!(:new).and_return(@my_post)
-    end
-    
-    before(:each) do
-      mock_get_request
-      stub_instapaper_api(:authenticate => {:status => 200})
-    end
-    
-    it "calls the 'authenticate' instapaper API call" do
-      stub_instapaper_api(:add => {:status => 200})
-      Net::HTTP::Post.should_receive(:new).with(/authenticate/).and_return(@my_post)
-      @client.authenticate
-    end
-    
-    it "passes along the username" do
-      @my_post.should_receive(:basic_auth).with("foo", nil)
-      @client.authenticate
-    end
-    
-    it "passes along the password if specified" do
-      @client = Gazette::Client.new("foo", :password => "bar")
-      @my_post.should_receive(:basic_auth).with("foo", "bar")
-      @client.authenticate
-    end
-    
-    it "passes the jsonp as a parameter if specified" do
-      @my_post.should_receive(:set_form_data).with(hash_including(:jsonp => "myfunc"))
-      @client.authenticate(:jsonp => "myfunc")
-    end
+  it "calls the 'authenticate' instapaper API call" do
+    stub_instapaper_api(:authenticate => {:status => 200})
+    @my_post = Net::HTTP::Post.new('/api/authenticate')
+    Net::HTTP::Post.should_receive(:new).with(/authenticate/).and_return(@my_post)
+    @client.authenticate
   end
     
   describe "with a 200 OK response" do
