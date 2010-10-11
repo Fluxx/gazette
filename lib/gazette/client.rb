@@ -15,8 +15,8 @@ module Gazette
     end
     
     # Attempts to authenticate
-    def authenticate
-      parse_response_for request(:authenticate)
+    def authenticate(options = {})
+      parse_response_for request(:authenticate, options)
     end
     
     # Adds a URL to a user's instapaper account

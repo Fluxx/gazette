@@ -34,6 +34,11 @@ describe Gazette::Client, "#authenticate" do
       @my_post.should_receive(:basic_auth).with("foo", "bar")
       @client.authenticate
     end
+    
+    it "passes the jsonp as a parameter if specified" do
+      @my_post.should_receive(:set_form_data).with(hash_including(:jsonp => "myfunc"))
+      @client.authenticate(:jsonp => "myfunc")
+    end
   end
     
   describe "with a 200 OK response" do
