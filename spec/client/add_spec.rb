@@ -48,6 +48,11 @@ describe Gazette::Client, "#add" do
       @client.add(INTERESTING_ARTICLE, :redirect => :close)
     end
     
+    it "passes the jsonp as a parameter if specified" do
+      @my_post.should_receive(:set_form_data).with(hash_including(:jsonp => "myfunc"))
+      @client.add(INTERESTING_ARTICLE, :jsonp => "myfunc")
+    end
+    
   end
   
   describe "with a 200 OK response" do
