@@ -10,6 +10,7 @@ GEM
       rubyforge (>= 2.0.0)
     json_pure (1.4.6)
     rake (0.8.7)
+    rcov (0.9.9)
     rspec (1.3.0)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
@@ -22,5 +23,6 @@ DEPENDENCIES
   fakeweb
   jeweler
   rake
+  rcov
   rspec
   yard
