@@ -7,8 +7,8 @@ end
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   gem.name = "gazette"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Ruby library to interact with the Instapaper API.}
+  gem.description = %Q{Simple Ruby wrapper gem to interact with the Instapaper API.  Supports authenticate and add API methods, as well as https, jsonp and redirect featres of the API.}
   gem.email = "jeff.pollard@gmail.com"
   gem.homepage = "http://github.com/Fluxx/gazette"
   gem.authors = ["Jeff Pollard"]
