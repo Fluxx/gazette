@@ -70,6 +70,15 @@ describe Gazette::Client, "HTTP basic auth" do
 end
 
 describe Gazette::Client, "over HTTPS" do
-  @client = Gazette::Client.new("foo", :https => true)
-  stub_instapaper_api(:authenticate => {:status => 200})
+  before(:each) do
+    @client = Gazette::Client.new("foo", :https => true)
+    stub_instapaper_api(:authenticate => {:status => 200})
+    @my_http = Net::HTTP.new(Gazette::Api::ADDRESS, 443)
+  end
+  
+  it "tells the HTTP client to use ssl" do
+    Net::HTTP.should_receive(:new).with(anything, 443).and_return(@my_http)
+    @client.authenticate
+  end
+  
 end

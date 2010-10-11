@@ -1,4 +1,7 @@
 require "net/http"
+require "net/https"
+require "openssl"
+require "pp"
 
 module Gazette
   class Client
@@ -12,6 +15,7 @@ module Gazette
       @username = username
       @password = options.delete(:password)
       @options = options
+      @https = !!(options.delete(:https))
     end
     
     # Attempts to authenticate
@@ -41,7 +45,9 @@ module Gazette
     # Actually heads out to the internet and performs the request
     # @todo Perhaps put me in the Api class/module?
     def request(method, params = {})
-      http = Net::HTTP.new(Api::ADDRESS)
+      http = Net::HTTP.new(Api::ADDRESS, (@https ? 443 : 80))
+      http.use_ssl = @https
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       request = Net::HTTP::Post.new(Api::ENDPOINT+method.to_s)
       request.basic_auth @username, @password
       request.set_form_data(params)
