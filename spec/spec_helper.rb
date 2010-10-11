@@ -21,3 +21,11 @@ def stub_instapaper_api(configuration)
     end
   end
 end
+
+# Stubs out the HTTP client and builds a @my_post variable, which is our own mock we can
+# use to verify HTTP actions
+def stub_http_client(path)
+  @my_post = Net::HTTP::Post.new(path)
+  Net::HTTP::Post.stub!(:new).and_return(@my_post)
+  @my_post
+end
