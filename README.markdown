@@ -1,6 +1,6 @@
 # Gazette
 
-Gazette is a Ruby gem to interact with the [Instapaper API](http://www.instapaper.com/api).  It offers complete functionality with all API features, including authentication and adding URLs to read later, operating over HTTPS and using HTTP basic authentication.
+Gazette is a Ruby gem to interact with the [Instapaper API](http://www.instapaper.com/api).  It offers complete functionality with all API features, including authentication and adding URLs to read later.  Gazette operates over HTTP and HTTPS, and uses (Instapaper-preferred) HTTP basic authentication.
 
 **NOTE: This gem is still in beta.  Production use not suggested, but encouraged.**
 
