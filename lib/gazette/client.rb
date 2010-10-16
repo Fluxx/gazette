@@ -35,7 +35,7 @@ module Gazette
     # to this method
     def parse_response_for(response)
       case response
-        when Net::HTTPOK then return Response::Success.new(response)
+        when Net::HTTPOK, Net::HTTPCreated then return Response::Success.new(response)
         when Net::HTTPForbidden then raise Response::InvalidCredentials
         when Net::HTTPInternalServerError then raise Response::ServerError
         else raise Response::UnknownError

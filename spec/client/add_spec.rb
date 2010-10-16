@@ -15,9 +15,9 @@ describe Gazette::Client, "#add" do
     end.should raise_error(ArgumentError)
   end
   
-  describe "with a 200 OK response" do
+  describe "with a 201 OK response" do
     before(:each) do
-      stub_instapaper_api(:add => {:status => 200})
+      stub_instapaper_api(:add => {:status => 201})
     end
     
     it "returns a Gazette::Response::Success object" do
