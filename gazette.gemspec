@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gazette}
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Pollard"]
-  s.date = %q{2010-10-10}
+  s.date = %q{2010-10-15}
   s.description = %q{Simple Ruby wrapper gem to interact with the Instapaper API.  Supports authenticate and add API methods, as well as https, jsonp and redirect featres of the API.}
   s.email = %q{jeff.pollard@gmail.com}
   s.extra_rdoc_files = [
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
-     "api.txt",
+     "gazette.gemspec",
      "lib/gazette.rb",
      "lib/gazette/api.rb",
      "lib/gazette/client.rb",
@@ -34,7 +34,8 @@ Gem::Specification.new do |s|
      "spec/client/client_spec.rb",
      "spec/response/success_spec.rb",
      "spec/spec.opts",
-     "spec/spec_helper.rb"
+     "spec/spec_helper.rb",
+     "todo.txt"
   ]
   s.homepage = %q{http://github.com/Fluxx/gazette}
   s.rdoc_options = ["--charset=UTF-8"]
