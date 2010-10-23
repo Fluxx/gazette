@@ -4,12 +4,23 @@ require "openssl"
 require "pp"
 
 module Gazette
+  # The Client class interacts with the Instapaper API.  Client hold user authentication
+  # information, as well as provide methods to authenticate user credentials and add URLs
+  # to their user's Instapaper account.
+  # @author Jeff Pollard
   class Client
-
+    
     attr_reader :username
     attr_reader :password
     
-    # Build a new client with the supplied username and options
+    # Create a new client.  Instapaper requires a user username.  Most Instapaper users
+    # <b>don't</b> have a password, as such it is optional
+    # 
+    # @param [String] username Instapaper username
+    # @param [Hash] options Additional client options
+    # @option options [String] :password Instapaper username
+    # @option options [Boolean] :https (false) Interact with the Instapaper API over
+    #  HTTPS.
     def initialize(username, options = {})
       raise ArgumentError.new("2nd parameter must be a Hash") unless options.is_a?(Hash)
       @username = username
@@ -18,12 +29,31 @@ module Gazette
       @https = !!(options.delete(:https))
     end
     
-    # Attempts to authenticate
+    # Attempts to authenticate the client's user credentials with Instapaper.
+    # 
+    # @param [Hash] options Additional authentication options
+    # @option options [String] :jsonp (nil) Returns results as JSON to the specified
+    #   Javascript callback.
+    # @return [Response::Success] Successful response from the Instapaper API.
+    # @raise [Response::InvalidCredentials]
+    # @raise [Response::ServerError]
+    # @raise [Response::UnknownError]
     def authenticate(options = {})
       parse_response_for request(:authenticate, options)
     end
     
     # Adds a URL to a user's instapaper account
+    # 
+    # @param [String] url URL of the content to add.
+    # @param [Hash] options Additional add options
+    # @option options [String] :title Title of the content.  If omitted, Instapaper will
+    #   generate a title.
+    # @option options [String] :select Sample/selection of content.
+    # @option options [:close] :redirect Response returns "Saved!" string and attempts to 
+    #   close its own window after a short delay.
+    # @option options [String] :jsonp (nil) Returns results as JSON to the specified
+    #   Javascript callback.
+    # @return [Response::Success] Successful response from the Instapaper API.
     def add(url, options = {})
       parse_response_for request(:add, options.merge(:url => url))
     end
