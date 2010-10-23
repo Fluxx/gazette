@@ -9,19 +9,19 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Pollard"]
-  s.date = %q{2010-10-15}
+  s.date = %q{2010-10-22}
   s.description = %q{Simple Ruby wrapper gem to interact with the Instapaper API.  Supports authenticate and add API methods, as well as https, jsonp and redirect featres of the API.}
   s.email = %q{jeff.pollard@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.md"
   ]
   s.files = [
     ".gitignore",
      "Gemfile",
      "Gemfile.lock",
      "LICENSE",
-     "README.rdoc",
+     "README.md",
      "Rakefile",
      "VERSION",
      "gazette.gemspec",
