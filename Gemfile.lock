@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    bluecloth (2.0.9)
     fakeweb (1.2.8)
     gemcutter (0.6.1)
     git (1.2.5)
@@ -20,6 +21,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bluecloth
   fakeweb
   jeweler
   rake
