@@ -1,1 +1,4 @@
 .bundle
+.yardoc
+doc
+pkg/*.gem
