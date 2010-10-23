@@ -7,14 +7,16 @@ module Gazette
   # The Client class interacts with the Instapaper API.  Client hold user authentication
   # information, as well as provide methods to authenticate user credentials and add URLs
   # to their user's Instapaper account.
+  # 
   # @author Jeff Pollard
+  # @see http://www.instapaper.com/api Instapaper-provided API documenation.
   class Client
     
     attr_reader :username
     attr_reader :password
     
     # Create a new client.  Instapaper requires a user username.  Most Instapaper users
-    # <b>don't</b> have a password, as such it is optional
+    # <b>don't</b> have a password, as such it is optional.
     # 
     # @param [String] username Instapaper username
     # @param [Hash] options Additional client options
@@ -42,7 +44,7 @@ module Gazette
       parse_response_for request(:authenticate, options)
     end
     
-    # Adds a URL to a user's instapaper account
+    # Adds a URL to a user's instapaper account.
     # 
     # @param [String] url URL of the content to add.
     # @param [Hash] options Additional add options
@@ -54,13 +56,17 @@ module Gazette
     # @option options [String] :jsonp (nil) Returns results as JSON to the specified
     #   Javascript callback.
     # @return [Response::Success] Successful response from the Instapaper API.
+    # @raise [Response::InvalidCredentials]
+    # @raise [Response::ServerError]
+    # @raise [Response::UnknownError]
     def add(url, options = {})
       parse_response_for request(:add, options.merge(:url => url))
     end
     
     private
     
-    # Handles the response from Instapaper
+    # Handles the response from Instapaper.
+    # 
     # @todo Put the raising logic in the Api class/module, then leave the response return
     # to this method
     def parse_response_for(response)
