@@ -29,15 +29,18 @@ module Gazette
       end
     end
     
+    # Superclass for all Gazette::Errors
+    class Error < Exception; end
+    
     # Response raised of the Instapaper returned a response indicating invalid user
     # credentials.
-    class InvalidCredentials < Exception; end
+    class InvalidCredentials < Error; end
     
     # Retponse raised if the Instapaper returned a server error (500).
-    class ServerError < Exception; end
+    class ServerError < Error; end
     
     # Response returned if there was some other type of unknown error.
-    class UnknownError < Exception; end
+    class UnknownError < Error; end
         
   end
 end
