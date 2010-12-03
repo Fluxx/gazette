@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gazette}
-  s.version = "0.1.2"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Pollard"]
-  s.date = %q{2010-10-22}
+  s.date = %q{2010-12-03}
   s.description = %q{Simple Ruby wrapper gem to interact with the Instapaper API.  Supports authenticate and add API methods, as well as https, jsonp and all other features of the API.}
   s.email = %q{jeff.pollard@gmail.com}
   s.extra_rdoc_files = [
@@ -29,9 +29,12 @@ Gem::Specification.new do |s|
      "lib/gazette/api.rb",
      "lib/gazette/client.rb",
      "lib/gazette/response.rb",
+     "lib/gazette/response/error.rb",
+     "lib/gazette/response/success.rb",
      "spec/client/add_spec.rb",
      "spec/client/authenticate_spec.rb",
      "spec/client/client_spec.rb",
+     "spec/response/error_spec.rb",
      "spec/response/success_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
@@ -46,6 +49,7 @@ Gem::Specification.new do |s|
     "spec/client/add_spec.rb",
      "spec/client/authenticate_spec.rb",
      "spec/client/client_spec.rb",
+     "spec/response/error_spec.rb",
      "spec/response/success_spec.rb",
      "spec/spec_helper.rb"
   ]
