@@ -12,6 +12,9 @@ module Gazette
       # Saved title of the content returned from the Instapaper API.
       attr_reader :instapaper_title
       
+      # The body returned by the Instapaper API
+      attr_reader :body
+      
       # Create a new Success object out of a net/http response.
       def initialize(response)
         unless response.is_a?(Net::HTTPResponse)
@@ -19,7 +22,8 @@ module Gazette
           raise ArgumentError.new("Argument must be a Net::HTTPResponse object") 
         end
         
-        # Build our ivars from the headers
+        # Build our ivars from the response and headers
+        @body = response.body
         @content_location = response.header['Content-Location']
         @instapaper_title = response.header['X-Instapaper-Title']
       end

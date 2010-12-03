@@ -32,7 +32,14 @@ With a `@client` in hand, you can call `@client.authenticate` to authenticate th
     
 ### Responses
     
-If a successful API call was made, Gazette returns an instance of `Gazette::Response::Success`.  Invalid responses from the API cause Gazette to *raise* one of the following exceptions:
+If a successful API call was made, Gazette returns an instance of `Gazette::Response::Success`.  Responses have the following instance methods to retrieve
+values returned by the Instapaper API:
+
+* `#content_location` Saved URL of the newly created item.
+* `#instapaper_title` Saved title of the newly created item.
+* `#body` Body of the response from the API request.  Useful when the `:redirect` or `:jsonp` option is used in a `@client.add` call (see below).
+
+Invalid responses from the API cause Gazette to *raise* one of the following exceptions:
 
 * `Gazette::Response::InvalidCredentials` - Invalid user credentials.
 * `Gazette::Response::ServerError` - API encountered an error. Please try again later.

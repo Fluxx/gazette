@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Gazette::Response::Success do
   before(:each) do
-    @response = mock("response", :is_a? => true, :header => {})
+    @response = mock("response", :is_a? => true, :header => {}, :body => "200")
   end
   
   it "raises an argument error unless the first argument is a Net::HTTPResponse object" do
@@ -20,6 +20,10 @@ describe Gazette::Response::Success do
     Gazette::Response::Success.new(@response).instapaper_title.should be_nil
   end
   
+  it "has an body attribute" do
+    Gazette::Response::Success.new(@response).body.should == "200"
+  end
+  
   it "sets content_location if the 'Content-Location' header is present" do
     @response.stub!(:header).and_return({'Content-Location' => 'http://www.example.com/'})
     Gazette::Response::Success.new(@response).content_location.should == 'http://www.example.com/'
@@ -29,5 +33,5 @@ describe Gazette::Response::Success do
     @response.stub!(:header).and_return({'X-Instapaper-Title' => 'nonse'})
     Gazette::Response::Success.new(@response).instapaper_title.should == 'nonse'
   end
-    
+      
 end
