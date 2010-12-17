@@ -2,7 +2,7 @@ module Gazette
   class Response
     
     # Superclass for all Gazette::Errors
-    class Error < Exception; end
+    class Error < StandardError; end
     
     # Response raised of the Instapaper returned a response indicating invalid user
     # credentials.

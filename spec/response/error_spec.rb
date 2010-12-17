@@ -8,4 +8,8 @@ describe Gazette::Response::Error do
     Gazette::Response::UnknownError.superclass.should == Gazette::Response::Error
   end
   
+  it "is a subclass of StandardError" do
+    Gazette::Response::Error.superclass.should == StandardError
+  end
+  
 end
