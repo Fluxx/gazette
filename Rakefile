@@ -6,7 +6,7 @@ Bundler::GemHelper.install_tasks
 YARD::Rake::YardocTask.new
 RSpec::Core::RakeTask.new(:spec)
 
-desc  "Run all specs with rcov"
+desc  "Check code coverage with rcov"
 RSpec::Core::RakeTask.new(:rcov) do |t|
   t.rcov = true
 end
