@@ -1,16 +1,15 @@
+PATH
+  remote: .
+  specs:
+    gazette (0.2.1)
+      bluecloth (> 2.0.0)
+      yard (> 0.6.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
     bluecloth (2.0.9)
     diff-lcs (1.1.2)
-    fakeweb (1.2.8)
-    gemcutter (0.6.1)
-    git (1.2.5)
-    jeweler (1.4.0)
-      gemcutter (>= 0.1.0)
-      git (>= 1.2.5)
-      rubyforge (>= 2.0.0)
-    json_pure (1.4.6)
     rake (0.8.7)
     rcov (0.9.9)
     rspec (2.4.0)
@@ -21,18 +20,15 @@ GEM
     rspec-expectations (2.4.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.4.0)
-    rubyforge (2.0.4)
-      json_pure (>= 1.1.7)
     yard (0.6.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bluecloth
-  fakeweb
-  jeweler
+  bluecloth (> 2.0.0)
+  gazette!
   rake
-  rcov
-  rspec
-  yard
+  rcov (~> 0.9.0)
+  rspec (~> 2.4.0)
+  yard (> 0.6.0)

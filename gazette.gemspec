@@ -19,6 +19,11 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
   
+  s.add_dependency(%q<yard>, ["> 0.6.0"])
+  s.add_dependency(%q<bluecloth>, ["> 2.0.0"])
+  
   s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
-  s.add_development_dependency(%q<yard>, ["~> 0.6.1"])
+  s.add_development_dependency(%q<rake>)
+  s.add_development_dependency(%q<rcov>, ["~> 0.9.0"])
+  
 end
