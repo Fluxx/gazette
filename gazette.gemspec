@@ -25,5 +25,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
   s.add_development_dependency(%q<rake>)
   s.add_development_dependency(%q<rcov>, ["~> 0.9.0"])
+  s.add_development_dependency(%q<fakeweb>, ["> 1.2.0"])
   
 end
