@@ -2,12 +2,10 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 require 'gazette'
-require 'spec'
-require 'spec/autorun'
 require 'fakeweb'
 
-Spec::Runner.configure do |config|
-
+RSpec.configure do |config|
+  config.color_enabled = true
 end
 
 # Stubs out the instapaper API using a simple configuration syntax:
