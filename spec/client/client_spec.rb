@@ -12,32 +12,28 @@ describe Gazette::Client, ".new" do
 
   shared_examples_for "a properlty constructed client" do
     it "sets the username as the first argument" do
-      @client.username.should eql("foo")
+      subject.username.should eql("foo")
     end
   end
 
   describe "with a single string argument" do
-    before(:each) do
-      @client = Gazette::Client.new("foo")
-    end
+    subject { Gazette::Client.new("foo") }
 
     it_should_behave_like "a properlty constructed client"
 
     it "has no password set" do
-      @client.password.should be_nil
+      subject.password.should be_nil
     end
 
   end
 
   describe "with a string and hash containing a :password" do
-    before(:each) do
-      @client = Gazette::Client.new("foo", :password => "bar")
-    end
+    subject { Gazette::Client.new("foo", :password => "bar") }
 
     it_should_behave_like "a properlty constructed client"
 
     it "has a password set" do
-      @client.password.should eql("bar")
+      subject.password.should eql("bar")
     end
 
   end
@@ -45,40 +41,44 @@ describe Gazette::Client, ".new" do
 end
 
 describe Gazette::Client, "HTTP basic auth" do
+  subject { Gazette::Client.new("foo") }
+  let(:my_post) { Net::HTTP::Post.new('/api/authenticate') }
+  
   before(:each) do
     stub_instapaper_api(:authenticate => {:status => 200})
-    @client = Gazette::Client.new("foo")
-    @my_post = Net::HTTP::Post.new('/api/authenticate')
-    Net::HTTP::Post.stub!(:new).and_return(@my_post)
+    post = my_post # Pull instance before overwriting constructor
+    Net::HTTP::Post.stub!(:new).and_return(post)
   end  
   
   it "passes along the username" do
-    @my_post.should_receive(:basic_auth).with("foo", nil)
-    @client.authenticate
+    my_post.should_receive(:basic_auth).with("foo", nil)
+    subject.authenticate
   end
   
   it "passes along the password if specified" do
-    @client = Gazette::Client.new("foo", :password => "bar")
-    @my_post.should_receive(:basic_auth).with("foo", "bar")
-    @client.authenticate
+    subject = Gazette::Client.new("foo", :password => "bar")
+    my_post.should_receive(:basic_auth).with("foo", "bar")
+    subject.authenticate
   end
   
   it "passes the jsonp as a parameter if specified" do
-    @my_post.should_receive(:set_form_data).with(hash_including(:jsonp => "myfunc"))
-    @client.authenticate(:jsonp => "myfunc")
+    my_post.should_receive(:set_form_data).with(hash_including(:jsonp => "myfunc"))
+    subject.authenticate(:jsonp => "myfunc")
   end
 end
 
 describe Gazette::Client, "over HTTPS" do
+  subject { Gazette::Client.new("foo", :https => true) }
+  let(:my_http) { Net::HTTP.new(Gazette::Api::ADDRESS, 443) }
+  
   before(:each) do
-    @client = Gazette::Client.new("foo", :https => true)
     stub_instapaper_api(:authenticate => {:status => 200})
-    @my_http = Net::HTTP.new(Gazette::Api::ADDRESS, 443)
   end
   
   it "tells the HTTP client to use ssl" do
-    Net::HTTP.should_receive(:new).with(anything, 443).and_return(@my_http)
-    @client.authenticate
+    http = my_http # Pull instance before overwriting constructor
+    Net::HTTP.should_receive(:new).with(anything, 443).and_return(http)
+    subject.authenticate
   end
   
 end
